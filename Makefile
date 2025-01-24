@@ -1,0 +1,52 @@
+#Name of the program
+NAME	:= fdf
+
+#Compilers and flags
+CC		:= cc
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+
+#Library
+LIBFT	:= libs/libft
+LIBMLX	:= libs/mlx42
+GLFW	:= libs/glfw/build/src/libglfw3.a
+
+#Directories
+HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
+LIBS	:= $(LIBMLX)/build/libmlx42.a $(GLFW) -ldl -pthread -lm $(LIBFT)/libft.a
+
+#Source files
+SRCS	:= src/fdf.c src/create.c src/utils.c src/map.c src/line.c
+OBJS	:= ${SRCS:.c=.o}
+
+#Rules
+all: libmlx libft $(NAME)
+
+libft: 
+	@make -C $(LIBFT)
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+#Compile object files
+%.o: %.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
+
+#Executable
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+
+#Clean Object 
+clean:
+	@rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
+	@make -C $(LIBFT) clean
+
+#Clean all generated files
+fclean: clean
+	@rm -rf $(NAME)
+	@make -C $(LIBFT) fclean
+
+#Recompile everything
+re: clean all
+
+.PHONY: all, clean, fclean, re, libmlx libft
