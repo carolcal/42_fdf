@@ -21,6 +21,21 @@ typedef struct s_fdf
     t_map       *map;
 }	t_fdf;
 
+typedef struct  s_matrix
+{
+    int				x;
+	int				y;
+	int				z;
+	struct t_matrix	*next;
+} t_matrix;
+
+typedef struct s_coordinates
+{
+	int		x;
+	int		y;
+	struct t_coordinates *next;
+} t_coordinates;
+
 void    handle_error(int err);
 void	free_array(char **array);
 t_fdf	*init_fdf(char *map_path);
