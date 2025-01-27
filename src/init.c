@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 16:44:44 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:11:15 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_map	*init_map(char	*map_path)
 	map->max_z = get_map_max_z(map_path);
 	return (map);
 }
-#include <stdio.h>
+
 t_cam	*init_camera(t_map *map)
 {
 	t_cam	*cam;
@@ -36,7 +36,6 @@ t_cam	*init_camera(t_map *map)
 	map_offset_y = (map->height + map->width) * cam->tile / 4;
 	cam->offset_x = WIDTH / 2 - map_offset_x;
 	cam->offset_y = HEIGHT / 2 - map_offset_y;
-	printf("\nx2: %f, y2: %f\n", cam->offset_x, cam->offset_y);
 	cam->tile_z = get_tile_z(map);
 	return (cam);
 }
@@ -55,7 +54,7 @@ t_fdf	*init_fdf(char *map_path)
 		handle_error(0);
 	fdf->cam = init_camera(fdf->map);
 	if (!fdf->cam)
-		handle_error(0);
+		handle_error(CAM_ERROR);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	return (fdf);
 }

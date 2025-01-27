@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:54 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 16:03:37 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:20:50 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int	get_map_width(char *map_path)
 {
 	int		fd;
-	char	**line;
+	char	**array;
 	int		count;
 
 	fd = open(map_path, O_RDONLY);
-	line = ft_split(get_next_line(fd), ' ');
+	array = get_array_line(fd);
 	count = 0;
-	while (line[count] != NULL)
+	while (array[count] != NULL)
 		count++;
-	free_array(line);
+	free_array(array);
 	close(fd);
 	ft_printf("width: %i\n", count);
 	return (count);
@@ -47,20 +47,6 @@ int	get_map_height(char *map_path)
 	close(fd);
 	ft_printf("height: %i\n", count);
 	return (count);
-}
-
-static char	**get_array_line(int fd)
-{
-	char	*line;
-	char	**array;
-
-	line = get_next_line(fd);
-	ft_printf("line: %s", line);
-	if (line == NULL)
-		return (NULL);
-	array = ft_split(line, ' ');
-	free (line);
-	return (array);
 }
 
 static int	get_max_z(char	*z, int max_z)

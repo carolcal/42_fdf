@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:31:11 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 16:47:53 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:09:44 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # define WIDTH 1600
 # define HEIGHT 900
 # define ANGLE 30
+
+//Error Macros
+# define INVALID_MAP "ERROR: Invalid Map!"
+# define EMPTY_MAP "ERROR: Map is empty!"
+# define WRONG_USAGE "Execute FDF as follows: ./fdf <map_path>."
+# define CAM_ERROR "ERROR: When initializing camera!"
+# define FDF_ERROR "ERROR: When initializing fdf!"
 
 typedef struct s_map
 {
@@ -59,8 +66,10 @@ typedef struct s_projected
 	int	y;
 }	t_projected;
 
-void	handle_error(int err);
+//Utils
+void	handle_error(char *err);
 void	free_array(char **array);
+char	**get_array_line(int fd);
 //FDF
 t_fdf	*init_fdf(char *map_path);
 //Map

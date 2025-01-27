@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 16:47:53 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:15:54 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,29 @@ t_projected	cal_position(t_coordinates p, t_cam *cam)
 	return (q);
 }
 
-char	**get_line(int fd)
-{
-	char	*line;
-	char	**array;
-
-	line = get_next_line(fd);
-	array = ft_split(line, ' ');
-	return (array);
-}
-
 void	render_map(t_fdf *fdf, char *map_path)
 {
 	int				fd;
-	char			**line;
+	char			**array;
 	t_coordinates	p;
 
 	p.y = 0;
 	fd = open(map_path, O_RDONLY);
 	while (p.y < fdf->map->height)
 	{
-		line = get_line(fd);
+		array = get_array_line(fd);
 		p.x = 0;
 		while (p.x < fdf->map->width)
 		{
-			p.z = ft_atoi(line[p.x]);
+			p.z = ft_atoi(array[p.x]);
 			ft_printf("x=%i, y=%i, z=%i\n", p.x, p.y, p.z);
 			insert_pixels(fdf->img, cal_position(p, fdf->cam));
+			ft_printf("inserted pixel\n");
 			p.x++;
 		}
+		ft_printf("chegou no final da linha\n");
 		p.y++;
-		free_array(line);
+		free_array(array);
 	}
 	close(fd);
 }
