@@ -21,20 +21,18 @@ typedef struct s_fdf
     t_map       *map;
 }	t_fdf;
 
-typedef struct  s_matrix
+typedef struct  s_coordinates
 {
-    int				x;
-	int				y;
-	int				z;
-	struct t_matrix	*next;
-} t_matrix;
-
-typedef struct s_coordinates
-{
-	int		x;
-	int		y;
-	struct t_coordinates *next;
+    int	x;
+	int	y;
+	int	z;
 } t_coordinates;
+
+typedef struct s_projected
+{
+	int	x;
+	int	y;
+} t_projected;
 
 void    handle_error(int err);
 void	free_array(char **array);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:40:56 by cayamash          #+#    #+#             */
-/*   Updated: 2024/11/18 18:42:13 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/25 15:27:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ int	ft_putstr(char *s)
 
 int	ft_putbase(long long n, char *base, int div)
 {
-	int		i;
 	int		count;
 	char	c;
 
-	i = 0;
 	count = 0;
 	if (n < 0 && div == 10)
 	{
