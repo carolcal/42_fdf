@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:39:25 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/24 14:35:26 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:33:40 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char *av[])
 		fdf = init_fdf(av[1]);
 		if (!fdf)
 			handle_error(0);
-		read_map(fdf->img, fdf->map, av[1]);
+		read_map(fdf, av[1]);
 		mlx_loop_hook(fdf->mlx, ft_hook, fdf->mlx);
 		mlx_loop(fdf->mlx);
 		mlx_terminate(fdf->mlx);

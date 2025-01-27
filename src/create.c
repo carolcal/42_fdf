@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/24 15:32:20 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:32:19 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ t_fdf	*init_fdf(char *map_path)
 	fdf->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
 	if (!fdf->img || (mlx_image_to_window(fdf->mlx, fdf->img, 0, 0) < 0))
 		handle_error(0);
+	fdf->cam = init_camera(fdf->map);
+	if (!fdf->cam)
+		handle_error(0);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	return (fdf);
 }
+
