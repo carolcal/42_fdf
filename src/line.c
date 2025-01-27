@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 15:48:48 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:47:53 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@ float	radiano(float graus)
 t_projected	cal_position(t_coordinates p, t_cam *cam)
 {
 	float		rad;
+	float		iso_x;
+	float		iso_y;
 	t_projected	q;
 
 	rad = radiano(ANGLE);
-	q.x = ((p.x - p.y) * cos(rad)) * cam->tile + cam->offset_x;
-	q.y = ((p.x + p.y) * sin(rad)) * cam->tile + cam->offset_y - (p.z * cam->offset_z);
+	iso_x = ((p.x - p.y) * cos(rad));
+	iso_y = ((p.x + p.y) * sin(rad));
+	q.x = (iso_x * cam->tile) + cam->offset_x;
+	q.y = (iso_y * cam->tile) + cam->offset_y - (p.z * cam->tile_z);
 	return (q);
 }
 
@@ -48,7 +52,7 @@ char	**get_line(int fd)
 	return (array);
 }
 
-void	read_map(t_fdf *fdf, char *map_path)
+void	render_map(t_fdf *fdf, char *map_path)
 {
 	int				fd;
 	char			**line;

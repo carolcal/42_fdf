@@ -6,13 +6,13 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/24 14:13:33 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:59:57 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    handle_error(int err)
+void	handle_error(int err)
 {
 	if (err == 0)
 		ft_printf("%s", mlx_strerror(mlx_errno));

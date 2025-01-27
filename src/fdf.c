@@ -6,18 +6,18 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:39:25 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 14:33:40 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:47:53 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
 
-
-static void ft_hook(void* param)
+static void	ft_hook(void *param)
 {
-	const mlx_t* mlx = param;
+	const mlx_t	*mlx;
 
+	mlx = param;
 	ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
 }
 
@@ -28,9 +28,10 @@ int	main(int ac, char *av[])
 	if (ac == 2)
 	{
 		fdf = init_fdf(av[1]);
+		ft_printf("initialized");
 		if (!fdf)
 			handle_error(0);
-		read_map(fdf, av[1]);
+		render_map(fdf, av[1]);
 		mlx_loop_hook(fdf->mlx, ft_hook, fdf->mlx);
 		mlx_loop(fdf->mlx);
 		mlx_terminate(fdf->mlx);

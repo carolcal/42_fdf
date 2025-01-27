@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:31:11 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 15:48:48 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:47:53 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_cam
 	float	tile;
 	float	offset_x;
 	float	offset_y;	
-	float	offset_z;
+	float	tile_z;
 }	t_cam;
 
 typedef struct s_fdf
@@ -61,9 +61,16 @@ typedef struct s_projected
 
 void	handle_error(int err);
 void	free_array(char **array);
+//FDF
 t_fdf	*init_fdf(char *map_path);
-t_map	*get_map(char	*map_path);
-t_cam	*init_camera(t_map *map);
-void	read_map(t_fdf *fdf, char *map_path);
+//Map
+int		get_map_width(char *map_path);
+int		get_map_height(char *map_path);
+float	get_map_max_z(char *map_path);
+//Camera
+int		get_tile_size(t_map *map);
+float	get_tile_z(t_map *map);
+//Render
+void	render_map(t_fdf *fdf, char *map_path);
 
 #endif

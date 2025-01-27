@@ -1,25 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 14:32:19 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:44:44 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
 
+t_map	*init_map(char	*map_path)
+{
+	t_map	*map;
+
+	map = malloc(sizeof(t_map));
+	map->width = get_map_width(map_path);
+	map->height = get_map_height(map_path);
+	map->max_z = get_map_max_z(map_path);
+	return (map);
+}
+#include <stdio.h>
+t_cam	*init_camera(t_map *map)
+{
+	t_cam	*cam;
+	float	map_offset_x;
+	float	map_offset_y;
+
+	cam = malloc(sizeof(t_cam));
+	cam->tile = get_tile_size(map);
+	map_offset_x = (map->width - map->height) * cam->tile / 2;
+	map_offset_y = (map->height + map->width) * cam->tile / 4;
+	cam->offset_x = WIDTH / 2 - map_offset_x;
+	cam->offset_y = HEIGHT / 2 - map_offset_y;
+	printf("\nx2: %f, y2: %f\n", cam->offset_x, cam->offset_y);
+	cam->tile_z = get_tile_z(map);
+	return (cam);
+}
+
 t_fdf	*init_fdf(char *map_path)
 {
 	t_fdf	*fdf;
 
 	fdf = malloc(sizeof(t_fdf));
-	fdf->map = get_map(map_path);
-	ft_printf("created map");
+	fdf->map = init_map(map_path);
 	fdf->mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
 	if (!fdf->mlx)
 		handle_error(0);
@@ -32,4 +59,3 @@ t_fdf	*init_fdf(char *map_path)
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	return (fdf);
 }
-
