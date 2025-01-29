@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:28:05 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/25 18:52:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/28 14:10:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ char	*get_next_line(int fd)
 	static char	*rest;
 
 	if (fd == -1 || BUFFER_SIZE <= 0)
+    {
+        rest = NULL;
 		return (NULL);
+    }
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
