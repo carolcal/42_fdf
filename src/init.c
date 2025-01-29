@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 18:11:15 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/29 20:32:31 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_map	*init_map(char	*map_path)
 	map = malloc(sizeof(t_map));
 	map->width = get_map_width(map_path);
 	map->height = get_map_height(map_path);
-	map->max_z = get_map_max_z(map_path);
+	map->matrix = get_map_matrix(map_path, map);
 	return (map);
 }
-
+#include <stdio.h>
 t_cam	*init_camera(t_map *map)
 {
 	t_cam	*cam;
@@ -37,6 +37,7 @@ t_cam	*init_camera(t_map *map)
 	cam->offset_x = WIDTH / 2 - map_offset_x;
 	cam->offset_y = HEIGHT / 2 - map_offset_y;
 	cam->tile_z = get_tile_z(map);
+	printf("tile: %f, offset_x: %f, offset_y: %f, tile_z: %f", cam->tile, cam->offset_x, cam->offset_y, cam->tile_z);
 	return (cam);
 }
 

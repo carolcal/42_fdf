@@ -15,7 +15,7 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LIBS	:= $(LIBMLX)/build/libmlx42.a $(GLFW) -ldl -pthread -lm $(LIBFT)/libft.a
 
 #Source files
-SRCS	:= src/fdf.c src/init.c src/utils.c src/map.c src/camera.c src/line.c
+SRCS	:= src/fdf.c src/init.c src/utils.c src/color.c src/map.c src/camera.c src/line.c src/render.c
 OBJS	:= ${SRCS:.c=.o}
 
 #Rules

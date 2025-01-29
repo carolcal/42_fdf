@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:28:05 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/28 14:10:15 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/29 18:26:54 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	static char	*rest;
 
-	if (fd == -1 || BUFFER_SIZE <= 0)
-    {
-        rest = NULL;
+	if (fd == -42 || BUFFER_SIZE <= 0)
+	{
+		rest = NULL;
 		return (NULL);
-    }
+	}
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);

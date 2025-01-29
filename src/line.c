@@ -5,66 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/27 18:15:54 by cayamash         ###   ########.fr       */
+/*   Created: 2025/01/29 15:57:36 by cayamash          #+#    #+#             */
+/*   Updated: 2025/01/29 15:58:10 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <math.h>
 
-void	insert_pixels(mlx_image_t *img, t_projected q)
+void	draw_horizontal(t_projected proj, t_draw line, mlx_image_t *img)
 {
-	ft_printf("x=%i, y=%i\n", q.x, q.y);
-	mlx_put_pixel(img, q.x, q.y, 0xFFFFFFFF);
-}
+	int	diff;
 
-float	radiano(float graus)
-{
-	float	rad;
-
-	rad = (graus / 180) * 3.1415;
-	return (rad);
-}
-
-t_projected	cal_position(t_coordinates p, t_cam *cam)
-{
-	float		rad;
-	float		iso_x;
-	float		iso_y;
-	t_projected	q;
-
-	rad = radiano(ANGLE);
-	iso_x = ((p.x - p.y) * cos(rad));
-	iso_y = ((p.x + p.y) * sin(rad));
-	q.x = (iso_x * cam->tile) + cam->offset_x;
-	q.y = (iso_y * cam->tile) + cam->offset_y - (p.z * cam->tile_z);
-	return (q);
-}
-
-void	render_map(t_fdf *fdf, char *map_path)
-{
-	int				fd;
-	char			**array;
-	t_coordinates	p;
-
-	p.y = 0;
-	fd = open(map_path, O_RDONLY);
-	while (p.y < fdf->map->height)
+	diff = line.diff_x / 2;
+	while (line.x != proj.end_x)
 	{
-		array = get_array_line(fd);
-		p.x = 0;
-		while (p.x < fdf->map->width)
+		mlx_put_pixel(img, line.x, line.y, proj.start_color);
+		diff -= line.diff_y;
+		if (diff < 0)
 		{
-			p.z = ft_atoi(array[p.x]);
-			ft_printf("x=%i, y=%i, z=%i\n", p.x, p.y, p.z);
-			insert_pixels(fdf->img, cal_position(p, fdf->cam));
-			ft_printf("inserted pixel\n");
-			p.x++;
+			line.y += line.desloc_y;
+			diff += line.diff_x;
 		}
-		ft_printf("chegou no final da linha\n");
-		p.y++;
-		free_array(array);
+		line.x += line.desloc_x;
 	}
-	close(fd);
+}
+
+void	draw_vertical(t_projected proj, t_draw line, mlx_image_t *img)
+{
+	int	diff;
+
+	diff = line.diff_y / 2;
+	while (line.y != proj.end_y)
+	{
+		mlx_put_pixel(img, line.x, line.y, proj.start_color);
+		diff -= line.diff_x;
+		if (diff < 0)
+		{
+			line.x += line.desloc_x;
+			diff += line.diff_y;
+		}
+		line.y += line.desloc_y;
+	}
+}
+
+void	draw_line(t_projected proj, mlx_image_t *img)
+{
+	t_draw	line;
+
+	line.diff_x = ft_abs(proj.end_x - proj.start_x);
+	line.diff_y = ft_abs(proj.end_y - proj.start_y);
+	if (proj.start_x < proj.end_x)
+		line.desloc_x = 1;
+	else
+		line.desloc_x = -1;
+	if (proj.start_y < proj.end_y)
+		line.desloc_y = 1;
+	else
+		line.desloc_y = -1;
+	line.x = proj.start_x;
+	line.y = proj.start_y;
+	if (line.diff_x > line.diff_y)
+		draw_horizontal(proj, line, img);
+	else
+		draw_vertical(proj, line, img);
 }

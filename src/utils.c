@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/28 14:14:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/29 19:05:53 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,6 @@ void	handle_error(char *err)
 {
 	if (err == 0)
 		ft_printf("%s", mlx_strerror(mlx_errno));
-	// else if (err == 1)
-	// 	ft_printf("Error: could not open file\n");
-	// else if (err == 2)
-	// 	ft_printf("Error: unexpected end of file\n");
-	// else if (err == 3)
-	// 	ft_printf("Error: could not split line\n");
-	// else if (err == 4)
-	// 	ft_printf("Error: could not read map\n");
 	else
 		ft_printf("%s\n", err);
 	exit(EXIT_FAILURE);
@@ -53,4 +45,29 @@ char	**get_array_line(int fd)
 	array = ft_split(line, ' ');
 	free (line);
 	return (array);
+}
+
+float	radiano(float graus)
+{
+	float	rad;
+
+	rad = (graus / 180) * 3.1415;
+	return (rad);
+}
+
+float	ft_abs(float n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
+int	array_len(char **array)
+{
+	int		count;
+
+	count = 0;
+	while (array[count] != NULL)
+		count++;
+	return (count);
 }
