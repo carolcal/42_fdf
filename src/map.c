@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:54 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/29 20:17:18 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:06:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	get_map_width(char *map_path)
 		count++;
 	free_array(array);
 	close(fd);
-	ft_printf("width: %i\n", count);
 	return (count);
 }
 
@@ -45,7 +44,6 @@ int	get_map_height(char *map_path)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	ft_printf("height: %i\n", count);
 	return (count);
 }
 
@@ -107,6 +105,6 @@ t_point	**get_map_matrix(char *map_path, t_map *map)
 		matrix[y] = fill_matrix_line(array, map, y);
 		y++;
 	}
-	ft_printf("matrix done!\n");
+	//ft_printf("matrix done!\n");
 	return (matrix);
 }

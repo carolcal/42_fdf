@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/29 19:42:23 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:30:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	render_map(t_fdf *fdf)
 	int	y;
 
 	y = 0;
-	ft_printf("render map\n");
 	while (y < fdf->map->height)
 	{
 		x = 0;
@@ -69,5 +68,4 @@ void	render_map(t_fdf *fdf)
 		}
 		y++;
 	}
-	ft_printf("rendered\n");
 }

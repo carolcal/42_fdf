@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:39:25 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/29 18:56:13 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:37:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fdf.h"
 
-static void	ft_hook(void *param)
+/* static void	ft_hook(void *param)
 {
 	const mlx_t	*mlx;
 
 	mlx = param;
 	ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-}
+} */
 
 static void	validade_file(char *map_path)
 {
@@ -48,6 +48,15 @@ static void	validade_file(char *map_path)
 	close (fd);
 }
 
+void	close_window(void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = (t_fdf *)param;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(fdf->mlx);
+}
+
 int	main(int ac, char *av[])
 {
 	t_fdf	*fdf;
@@ -58,9 +67,10 @@ int	main(int ac, char *av[])
 	fdf = init_fdf(av[1]);
 	if (!fdf)
 		handle_error(FDF_ERROR);
+	mlx_loop_hook(fdf->mlx, close_window, fdf);
 	render_map(fdf);
-	mlx_loop_hook(fdf->mlx, ft_hook, fdf->mlx);
 	mlx_loop(fdf->mlx);
 	mlx_terminate(fdf->mlx);
+    free_all(fdf);
 	return (0);
 }

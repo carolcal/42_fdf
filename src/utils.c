@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/29 19:05:53 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:52:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	**get_array_line(int fd)
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (NULL);
+    line = ft_strtrim(line, "\n");
 	array = ft_split(line, ' ');
 	free (line);
 	return (array);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/29 20:32:31 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:06:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_cam	*init_camera(t_map *map)
 	cam->offset_x = WIDTH / 2 - map_offset_x;
 	cam->offset_y = HEIGHT / 2 - map_offset_y;
 	cam->tile_z = get_tile_z(map);
-	printf("tile: %f, offset_x: %f, offset_y: %f, tile_z: %f", cam->tile, cam->offset_x, cam->offset_y, cam->tile_z);
+	//printf("tile: %f, offset_x: %f, offset_y: %f, tile_z: %f", cam->tile, cam->offset_x, cam->offset_y, cam->tile_z);
 	return (cam);
 }
 
