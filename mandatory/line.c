@@ -6,21 +6,23 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:57:36 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 09:26:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:11:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+
 void	draw_horizontal(t_projected proj, t_draw line, mlx_image_t *img)
 {
-	int	diff;
-    //ft_printf("draw line horizontal\n");
+	int			diff;
+	uint32_t	color;
+
 	diff = line.diff_x / 2;
 	while (line.x != proj.end_x)
 	{
-        //printf("x: %i, y: %i, color: %d\n",line.x, line.y, proj.start_color);
-		mlx_put_pixel(img, line.x, line.y, proj.start_color);
+		color = gradient(proj.start_color, proj.end_color,
+				line.diff_x, ft_abs(line.x - proj.start_x));
+		mlx_put_pixel(img, line.x, line.y, color);
 		diff -= line.diff_y;
 		if (diff < 0)
 		{
@@ -33,11 +35,15 @@ void	draw_horizontal(t_projected proj, t_draw line, mlx_image_t *img)
 
 void	draw_vertical(t_projected proj, t_draw line, mlx_image_t *img)
 {
-	int	diff;
+	int			diff;
+	uint32_t	color;
+
 	diff = line.diff_y / 2;
 	while (line.y != proj.end_y)
 	{
-		mlx_put_pixel(img, line.x, line.y, proj.start_color);
+		color = gradient(proj.start_color, proj.end_color,
+				line.diff_y, ft_abs(line.y - proj.start_y));
+		mlx_put_pixel(img, line.x, line.y, color);
 		diff -= line.diff_x;
 		if (diff < 0)
 		{
@@ -64,7 +70,6 @@ void	draw_line(t_projected proj, mlx_image_t *img)
 		line.desloc_y = -1;
 	line.x = proj.start_x;
 	line.y = proj.start_y;
-    //ft_printf("draw line\n");
 	if (line.diff_x > line.diff_y)
 		draw_horizontal(proj, line, img);
 	else

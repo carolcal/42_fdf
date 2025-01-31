@@ -6,12 +6,22 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 09:30:09 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 18:18:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <math.h>
+
+void	background(t_fdf *fdf)
+{
+	uint32_t	*pixel;
+	uint32_t	index;
+
+	pixel = (uint32_t *)fdf->img->pixels;
+	index = fdf->img->height * fdf->img->width;
+	while (index--)
+		pixel[index] = 0xff000000;
+}
 
 t_projected	isometric(t_point start, t_point end, t_cam *cam, float rad)
 {
@@ -35,7 +45,6 @@ t_projected	isometric(t_point start, t_point end, t_cam *cam, float rad)
 	return (proj);
 }
 
-
 void	render_line(t_point start, t_point end, t_fdf *fdf)
 {
 	float		rad;
@@ -45,19 +54,19 @@ void	render_line(t_point start, t_point end, t_fdf *fdf)
 	proj = isometric(start, end, fdf->cam, rad);
 	draw_line(proj, fdf->img);
 }
-#include <stdio.h>
+
 void	render_map(t_fdf *fdf)
 {
 	int	x;
 	int	y;
 
 	y = 0;
+	background(fdf);
 	while (y < fdf->map->height)
 	{
 		x = 0;
 		while (x < fdf->map->width)
 		{
-			//printf("x: %i, y: %i, z: %i, color: %d\n", fdf->map->matrix[y][x].x, fdf->map->matrix[y][x].y, fdf->map->matrix[y][x].z, fdf->map->matrix[y][x].color);
 			if (x + 1 < fdf->map->width)
 				render_line(fdf->map->matrix[y][x],
 					fdf->map->matrix[y][x + 1], fdf);

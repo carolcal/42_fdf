@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 08:39:29 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:17:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**get_array_line(int fd)
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (NULL);
-    line = ft_strtrim(line, "\n");
+	line = ft_strtrim(line, "\n");
 	array = ft_split(line, ' ');
 	free (line);
 	return (array);
@@ -50,5 +50,3 @@ int	array_len(char **array)
 		count++;
 	return (count);
 }
-
-

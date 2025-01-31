@@ -1,54 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:39:25 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 10:16:10 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 17:27:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fdf.h"
 
-/* static void	ft_hook(void *param)
-{
-	const mlx_t	*mlx;
-
-	mlx = param;
-	ft_printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-} */
-
-static void	validade_file(char *map_path)
-{
-	int		fd;
-	char	*content;
-	size_t	len;
-
-	len = ft_strlen(map_path);
-	if (len < 4 || ft_strncmp(map_path + len - 4, ".fdf", 4) != 0)
-		handle_error(INVALID_MAP);
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		close (fd);
-		handle_error(INVALID_MAP);
-	}
-	content = get_next_line(fd);
-	if (content == NULL)
-	{
-		free(content);
-		close(fd);
-		handle_error(EMPTY_MAP);
-	}
-	free (content);
-	get_next_line(-42);
-	close (fd);
-}
-
-void	close_window(void *param)
+static void	close_window(void *param)
 {
 	t_fdf	*fdf;
 
@@ -71,6 +35,6 @@ int	main(int ac, char *av[])
 	render_map(fdf);
 	mlx_loop(fdf->mlx);
 	mlx_terminate(fdf->mlx);
-    free_all(fdf);
+	free_all(fdf);
 	return (0);
 }

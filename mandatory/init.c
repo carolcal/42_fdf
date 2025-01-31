@@ -6,11 +6,10 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 10:30:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:16:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fdf.h"
 
 t_map	*init_map(char	*map_path)
@@ -20,11 +19,11 @@ t_map	*init_map(char	*map_path)
 	map = malloc(sizeof(t_map));
 	map->width = get_map_width(map_path);
 	map->height = get_map_height(map_path);
-    map->max_z = 0;
+	map->max_z = 0;
 	map->matrix = get_map_matrix(map_path, map);
 	return (map);
 }
-#include <stdio.h>
+
 t_cam	*init_camera(t_map *map)
 {
 	t_cam	*cam;

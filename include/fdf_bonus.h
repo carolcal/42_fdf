@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:31:11 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 16:23:44 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 18:17:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include "libft.h"
 # include <MLX42/MLX42.h>
@@ -82,6 +82,10 @@ typedef struct s_draw
 	int	y;
 }	t_draw;
 
+//Key Handler
+void		translation(t_fdf *fdf);
+void		scale(t_fdf *fdf);
+void		scale_z(t_fdf *fdf);
 //Error & Free
 void		handle_error(char *err);
 void		validade_file(char *map_path);
@@ -114,6 +118,6 @@ float		get_tile_z(t_map *map);
 //Line
 void		draw_line(t_projected proj, mlx_image_t *img);
 //Render
-void		render_map(t_fdf *fdf);
+void		render_map(void *param);
 
 #endif

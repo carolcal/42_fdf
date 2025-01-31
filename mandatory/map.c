@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:54 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 10:17:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:20:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_map_width(char *map_path)
 	while (array[count] != NULL)
 		count++;
 	free_array(array);
-    get_next_line(-42);
+	get_next_line(-42);
 	close(fd);
 	return (count);
 }
@@ -44,24 +44,15 @@ int	get_map_height(char *map_path)
 		free(line);
 		line = get_next_line(fd);
 	}
-    get_next_line(-42);
+	get_next_line(-42);
 	close(fd);
 	return (count);
-}
-
-uint32_t	get_color(int z)
-{
-	if (z <= 0)
-		return (put_alpha(0x0000FF));
-	else
-		return (put_alpha(0xFFFFFF));
 }
 
 t_point	*fill_matrix_line(char **array, t_map *map, int y)
 {
 	t_point	*line;
 	int		x;
-	char	**value;
 
 	line = (t_point *)malloc(map->width * sizeof(t_point));
 	x = 0;
@@ -69,16 +60,11 @@ t_point	*fill_matrix_line(char **array, t_map *map, int y)
 	{
 		line[x].x = x;
 		line[x].y = y;
-		value = ft_split(array[x], ',');
-		line[x].z = ft_atoi(value[0]);
+		line[x].z = ft_atoi(array[x]);
 		if (map->max_z < ft_abs(line[x].z))
 			map->max_z = ft_abs(line[x].z);
-		if (value[1])
-			line[x].color = put_alpha(ft_hex_to_int(value[1]));
-		else
-			line[x].color = get_color(line[x].z);
+		line[x].color = get_color(line[x].z, array[x]);
 		x++;
-        free_array(value);
 	}
 	return (line);
 }
@@ -102,9 +88,8 @@ t_point	**get_map_matrix(char *map_path, t_map *map)
 			handle_error(INVALID_MAP);
 		}
 		matrix[y] = fill_matrix_line(array, map, y);
-        free_array(array);
+		free_array(array);
 		y++;
 	}
-	//ft_printf("matrix done!\n");
 	return (matrix);
 }

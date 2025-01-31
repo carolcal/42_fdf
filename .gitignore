@@ -2,3 +2,4 @@
 subject.pdf
 libs/glfw
 libs/mlx42
+valgrind.log

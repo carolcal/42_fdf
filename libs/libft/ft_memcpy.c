@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:12:05 by cayamash          #+#    #+#             */
-/*   Updated: 2024/10/28 18:36:31 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:25:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
-	if (!dest && !src && n > 0)//verificar se n>0 faz diferença
+	if (!dest && !src && n > 0)
 		return (NULL);
 	i = 0;
 	while (i < n)
