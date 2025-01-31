@@ -6,33 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/30 10:52:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 08:39:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	handle_error(char *err)
-{
-	if (err == 0)
-		ft_printf("%s", mlx_strerror(mlx_errno));
-	else
-		ft_printf("%s\n", err);
-	exit(EXIT_FAILURE);
-}
-
-void	free_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
 
 char	**get_array_line(int fd)
 {
@@ -72,3 +50,5 @@ int	array_len(char **array)
 		count++;
 	return (count);
 }
+
+

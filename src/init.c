@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/30 10:06:15 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 10:30:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_map	*init_map(char	*map_path)
 	map = malloc(sizeof(t_map));
 	map->width = get_map_width(map_path);
 	map->height = get_map_height(map_path);
+    map->max_z = 0;
 	map->matrix = get_map_matrix(map_path, map);
 	return (map);
 }
@@ -37,7 +38,6 @@ t_cam	*init_camera(t_map *map)
 	cam->offset_x = WIDTH / 2 - map_offset_x;
 	cam->offset_y = HEIGHT / 2 - map_offset_y;
 	cam->tile_z = get_tile_z(map);
-	//printf("tile: %f, offset_x: %f, offset_y: %f, tile_z: %f", cam->tile, cam->offset_x, cam->offset_y, cam->tile_z);
 	return (cam);
 }
 

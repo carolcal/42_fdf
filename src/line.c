@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:57:36 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/30 14:30:36 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/31 09:26:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	draw_horizontal(t_projected proj, t_draw line, mlx_image_t *img)
 void	draw_vertical(t_projected proj, t_draw line, mlx_image_t *img)
 {
 	int	diff;
-    //ft_printf("draw line vertical\n");
 	diff = line.diff_y / 2;
 	while (line.y != proj.end_y)
 	{

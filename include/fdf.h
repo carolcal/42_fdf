@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:31:11 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/29 20:33:10 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:30:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,11 @@ typedef struct s_draw
 	int	y;
 }	t_draw;
 
-//Utils
+//Error & Free
 void	handle_error(char *err);
 void	free_array(char **array);
+void    free_all(t_fdf *fdf);
+//Utils
 char	**get_array_line(int fd);
 float	radiano(float graus);
 float	ft_abs(float n);
@@ -93,8 +95,6 @@ t_fdf	*init_fdf(char *map_path);
 //Map
 int		get_map_width(char *map_path);
 int		get_map_height(char *map_path);
-// float	get_map_max_z(char *map_path);
-//void	get_map_info(char *map_path, t_map *map);
 t_point	**get_map_matrix(char *map_path, t_map *map);
 //Color
 int	ft_hex_to_int(char *hex);

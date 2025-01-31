@@ -15,7 +15,7 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
 LIBS	:= $(LIBMLX)/build/libmlx42.a $(GLFW) -ldl -pthread -lm $(LIBFT)/libft.a
 
 #Source files
-SRCS	:= src/fdf.c src/init.c src/utils.c src/color.c src/map.c src/camera.c src/line.c src/render.c
+SRCS	:= src/error_free.c src/fdf.c src/init.c src/utils.c src/color.c src/map.c src/camera.c src/line.c src/render.c
 OBJS	:= ${SRCS:.c=.o}
 
 #Rules
@@ -26,6 +26,9 @@ libft:
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+val:
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=./sup.sup ./fdf ./maps/42.fdf > valgrind.log 2>&1
 
 #Compile object files
 %.o: %.c
