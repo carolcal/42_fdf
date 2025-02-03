@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:28:05 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/03 11:28:55 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:44:37 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ char	*get_next_line(int fd)
 	static char	*rest;
 
 	if (fd == -42 || BUFFER_SIZE <= 0)
-	{
-		free_buffer(&rest);
-		return (NULL);
-	}
+		return (free_buffer(&rest));
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);

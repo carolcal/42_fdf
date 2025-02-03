@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/01 10:57:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/03 17:31:57 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,15 @@ t_map	*init_map(char	*map_path)
 t_cam	*init_camera(t_map *map)
 {
 	t_cam	*cam;
-	float	map_offset_x;
-	float	map_offset_y;
 
 	cam = malloc(sizeof(t_cam));
 	cam->tile = get_tile_size(map);
-	map_offset_x = (map->width - map->height) * cam->tile / 2;
-	map_offset_y = (map->height + map->width) * cam->tile / 4;
-	cam->offset_x = WIDTH / 2 - map_offset_x;
-	cam->offset_y = HEIGHT / 2 - map_offset_y;
-	cam->tile_z = get_tile_z(map);
 	cam->view = ISOMETRIC;
-	cam->rotation_x = 0;
-	cam->rotation_y = 0;
+	get_offset(map, cam);
+	cam->tile_z = get_tile_z(map);
+	cam->angle_x = 0;
+	cam->angle_y = 0;
+	cam->angle_z = 0;
 	return (cam);
 }
 

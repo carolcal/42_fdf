@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/03 12:12:28 by cayamash          #+#    #+#              #
+#    Updated: 2025/02/03 17:25:45 by cayamash         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #Name of the program
 NAME		:= fdf
 NAME_BONUS	:= fdf_bonus
@@ -9,7 +21,6 @@ CFLAGS		:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 #Library
 LIBFT		:= libs/libft
 LIBMLX		:= libs/MLX42
-# GLFW		:= libs/glfw/build/src/libglfw3.a
 
 #Directories
 HEADERS		:= -I include/ -I $(LIBMLX)/include -I $(LIBFT)
@@ -22,10 +33,14 @@ SRCS		:= mandatory/error_free.c mandatory/init.c mandatory/utils.c \
 				mandatory/main.c
 SRCS_BONUS	:= bonus/key_handler_bonus.c bonus/error_free_bonus.c bonus/init_bonus.c \
 				bonus/utils_bonus.c bonus/color_utils_bonus.c bonus/color_bonus.c \
-				bonus/map_bonus.c bonus/camera_bonus.c bonus/line_bonus.c \
-				bonus/render_bonus.c bonus/main_bonus.c
+				bonus/map_bonus.c bonus/camera_bonus.c bonus/line_bonus.c bonus/rotate_bonus.c \
+				bonus/projections1_bonus.c bonus/projections2_bonus.c bonus/render_bonus.c \
+				bonus/main_bonus.c
 OBJS		:= ${SRCS:.c=.o}
 OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}
+
+#Valgrind
+VALGRIND	:= valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=./sup.sup
 
 #Rules
 all: libmlx libft $(NAME)
@@ -39,7 +54,10 @@ libmlx:
 bonus: $(NAME_BONUS)
 
 val:
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=./sup.sup --soname-synonyms=somelibrary ./fdf ./maps/42.fdf > valgrind.log 2>&1
+	$(VALGRIND) ./fdf ./maps/42.fdf > valgrind.log 2>&1
+
+val_bonus:
+	$(VALGRIND) ./fdf_bonus ./maps/42.fdf > valgrind.log 2>&1
 
 #Compile object files
 %.o: %.c

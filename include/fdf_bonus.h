@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:31:11 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/01 10:51:46 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/03 17:55:05 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define WIDTH 1600
 # define HEIGHT 900
-# define ANGLE 45
+# define ANGLE 30
 
 //Error Macros
 # define INVALID_MAP "ERROR: Invalid Map!"
@@ -32,11 +32,12 @@
 
 //View Macros
 # define ISOMETRIC 0
-# define TOP 1
-# define FRONT 2
-# define LEFT 3
-# define RIGHT 4
-# define BACK 5
+# define PARALLEL 1
+# define TOP 2
+# define FRONT 3
+# define LEFT 4
+# define RIGHT 5
+# define BACK 6
 
 typedef struct s_point
 {
@@ -70,9 +71,10 @@ typedef struct s_cam
 	float	offset_x;
 	float	offset_y;	
 	float	tile_z;
-    int		view;
-	float	rotation_x;
-	float	rotation_y;
+	int		view;
+	float	angle_x;
+	float	angle_y;
+	float	angle_z;
 }	t_cam;
 
 typedef struct s_fdf
@@ -97,6 +99,8 @@ typedef struct s_draw
 void		translation(t_fdf *fdf);
 void		scale(t_fdf *fdf);
 void		scale_z(t_fdf *fdf);
+void		view(t_fdf *fdf);
+void		rotation(t_fdf *fdf);
 //Error & Free
 void		handle_error(char *err);
 void		validade_file(char *map_path);
@@ -126,9 +130,19 @@ uint32_t	gradient(int start, int end, int grad_len, int position);
 //Camera
 float		get_tile_size(t_map *map);
 float		get_tile_z(t_map *map);
+void		get_offset(t_map *map, t_cam *cam);
+void		reset_cam(t_fdf *fdf);
 //Line
 void		draw_line(t_projected proj, mlx_image_t *img);
+//Projections
+t_projected	isometric(t_point start, t_point end, t_cam *cam, float rad);
+t_projected	parallel(t_point start, t_point end, t_cam *cam);
+t_projected	top(t_point start, t_point end, t_cam *cam);
+t_projected	front(t_point start, t_point end, t_cam *cam);
+t_projected	right(t_point start, t_point end, t_cam *cam);
+t_projected	left(t_point start, t_point end, t_cam *cam);
 //Render
+t_point		rotate(t_point p, t_cam *cam);
 void		render_map(void *param);
 
 #endif

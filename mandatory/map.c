@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:54 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/03 10:21:41 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:04:16 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_point	**get_map_matrix(char *map_path, t_map *map)
 		{
 			free_array(array);
 			get_next_line(-42);
+			close(fd);
 			handle_error(INVALID_MAP);
 		}
 		matrix[y] = fill_matrix_line(array, map, y);
@@ -93,5 +94,6 @@ t_point	**get_map_matrix(char *map_path, t_map *map)
 		y++;
 	}
 	get_next_line(-42);
+	close(fd);
 	return (matrix);
 }

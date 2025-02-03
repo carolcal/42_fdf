@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:18:02 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 17:26:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/03 17:55:37 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,40 @@ float	get_tile_z(t_map *map)
 		return (0.2);
 	else
 		return (1);
+}
+
+void	get_offset(t_map *map, t_cam *cam)
+{
+	float	map_offset_x;
+	float	map_offset_y;
+
+	if (cam->view == ISOMETRIC)
+	{
+		map_offset_x = (map->width - map->height) * cam->tile / 2;
+		map_offset_y = (map->height + map->width) * cam->tile / 4;
+		cam->offset_x = WIDTH / 2 - map_offset_x;
+		cam->offset_y = HEIGHT / 2 - map_offset_y;
+	}
+	else if (cam->view == PARALLEL || cam->view == TOP)
+	{
+		map_offset_x = map->width * cam->tile / 2;
+		map_offset_y = (map->height + map->width) * cam->tile / 4;
+		cam->offset_x = WIDTH / 2 - map_offset_x;
+		cam->offset_y = HEIGHT / 2 - map_offset_y;
+	}
+	else
+	{
+		map_offset_x = map->height * cam->tile / 2;
+		map_offset_y = map->max_z * cam->tile_z / 4;
+		cam->offset_x = WIDTH / 2 - map_offset_x;
+		cam->offset_y = HEIGHT / 2 - map_offset_y;
+	}
+}
+
+void	reset_cam(t_fdf *fdf)
+{
+	fdf->cam->angle_x = 0;
+	fdf->cam->angle_y = 0;
+	fdf->cam->angle_z = 0;
+	get_offset(fdf->map, fdf->cam);
 }

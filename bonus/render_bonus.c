@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/01 09:52:15 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/03 17:43:50 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,32 @@ void	background(t_fdf *fdf)
 		pixel[index] = 0xff000000;
 }
 
-t_projected	isometric(t_point start, t_point end, t_cam *cam, float rad)
+t_projected	get_projection(t_point start, t_point end, t_cam *cam)
 {
-	float		x0;
-	float		y0;
-	float		x1;
-	float		y1;
-	t_projected	proj;
+	float	rad;
 
-	x0 = ((start.x - start.y) * cos(rad));
-	y0 = ((start.x + start.y) * sin(rad));
-	proj.start_x = (x0 * cam->tile) + cam->offset_x;
-	proj.start_y = (y0 * cam->tile) + cam->offset_y - (start.z * cam->tile_z);
-	proj.start_color = start.color;
-	x1 = ((end.x - end.y) * cos(rad));
-	y1 = ((end.x + end.y) * sin(rad));
-	proj.end_x = (x1 * cam->tile) + cam->offset_x;
-	proj.end_y = (y1 * cam->tile) + cam->offset_y - (end.z * cam->tile_z);
-	proj.end_color = end.color;
-	return (proj);
+	rad = radiano(ANGLE);
+	if (cam->view == PARALLEL)
+		return (parallel(start, end, cam));
+	else if (cam->view == TOP)
+		return (top(start, end, cam));
+	else if (cam->view == FRONT)
+		return (front(start, end, cam));
+	else if (cam->view == RIGHT)
+		return (right(start, end, cam));
+	else if (cam->view == LEFT)
+		return (left(start, end, cam));
+	else
+		return (isometric(start, end, cam, rad));
 }
 
 void	render_line(t_point start, t_point end, t_fdf *fdf)
 {
-	float		rad;
 	t_projected	proj;
 
-	rad = radiano(ANGLE);
- //   if (fdf->map->view == ISOMETRIC)
-	proj = isometric(start, end, fdf->cam, rad);
+	start = rotate(start, fdf->cam);
+	end = rotate(end, fdf->cam);
+	proj = get_projection(start, end, fdf->cam);
 	draw_line(proj, fdf->img);
 }
 

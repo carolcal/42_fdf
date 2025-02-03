@@ -72,8 +72,6 @@ static void	free_matrix(t_map *map)
 
 void	free_all(t_fdf *fdf)
 {
-	// if (fdf->img)
-	// 	free(fdf->img);
 	if (fdf->map)
 	{
 		if (fdf->map->matrix)
