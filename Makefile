@@ -8,12 +8,12 @@ CFLAGS		:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 
 #Library
 LIBFT		:= libs/libft
-LIBMLX		:= libs/mlx42
-GLFW		:= libs/glfw/build/src/libglfw3.a
+LIBMLX		:= libs/MLX42
+# GLFW		:= libs/glfw/build/src/libglfw3.a
 
 #Directories
 HEADERS		:= -I include/ -I $(LIBMLX)/include -I $(LIBFT)
-LIBS		:= $(LIBMLX)/build/libmlx42.a $(GLFW) -ldl -pthread -lm $(LIBFT)/libft.a
+LIBS		:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)/libft.a
 
 #Source files
 SRCS		:= mandatory/error_free.c mandatory/init.c mandatory/utils.c \
@@ -39,7 +39,7 @@ libmlx:
 bonus: $(NAME_BONUS)
 
 val:
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=./sup.sup --soname-synonyms=somelibrary ./fdf ./maps/teste.fdf > valgrind.log 2>&1
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=./sup.sup --soname-synonyms=somelibrary ./fdf ./maps/42.fdf > valgrind.log 2>&1
 
 #Compile object files
 %.o: %.c

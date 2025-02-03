@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:28:05 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/29 18:26:54 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:28:55 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 
 	if (fd == -42 || BUFFER_SIZE <= 0)
 	{
-		rest = NULL;
+		free_buffer(&rest);
 		return (NULL);
 	}
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -33,10 +33,7 @@ char	*get_next_line(int fd)
 	line = read_line(fd, buffer, rest);
 	free_buffer(&buffer);
 	if (!line)
-	{
-		free_buffer(&rest);
-		return (NULL);
-	}
+		return (free_buffer(&rest));
 	rest = get_rest(line);
 	return (line);
 }
@@ -51,7 +48,7 @@ static char	*read_line(int fd, char *buffer, char *rest)
 	{
 		buff_size = read(fd, buffer, BUFFER_SIZE);
 		if (buff_size == -1)
-			return (NULL);
+			return (free_buffer(&rest));
 		else if (buff_size == 0)
 			break ;
 		buffer[buff_size] = '\0';
