@@ -6,7 +6,7 @@
 #    By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 15:38:33 by cayamash          #+#    #+#              #
-#    Updated: 2025/01/23 13:13:56 by cayamash         ###   ########.fr        #
+#    Updated: 2025/02/03 18:22:49 by cayamash         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,31 +24,29 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c\
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
 		ft_printf_utils.c ft_printf.c get_next_line.c
 
-BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c\
-		ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c\
-		ft_lstiter_bonus.c ft_lstmap_bonus.c ft_get_next_line_bonus.c
-
 OBJS = $(SRCS:.c=.o)
 
-OBJS_BONUS = $(BONUS:.c=.o)
+#Style
+GREEN		:= \033[1;32m
+END			:= \033[-m
+
+.SILENT:
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-
-bonus: $(OBJS_BONUS)
-	ar rcs $(NAME) $(OBJS_BONUS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "$(GREEN)Libft Compiled!$(END)"
 
 %o: %c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
