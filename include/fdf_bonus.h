@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:31:11 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 18:17:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/01 10:51:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define WIDTH 1600
 # define HEIGHT 900
-# define ANGLE 30
+# define ANGLE 45
 
 //Error Macros
 # define INVALID_MAP "ERROR: Invalid Map!"
@@ -29,6 +29,14 @@
 # define WRONG_USAGE "Execute FDF as follows: ./fdf <map_path>."
 # define CAM_ERROR "ERROR: When initializing camera!"
 # define FDF_ERROR "ERROR: When initializing fdf!"
+
+//View Macros
+# define ISOMETRIC 0
+# define TOP 1
+# define FRONT 2
+# define LEFT 3
+# define RIGHT 4
+# define BACK 5
 
 typedef struct s_point
 {
@@ -62,6 +70,9 @@ typedef struct s_cam
 	float	offset_x;
 	float	offset_y;	
 	float	tile_z;
+    int		view;
+	float	rotation_x;
+	float	rotation_y;
 }	t_cam;
 
 typedef struct s_fdf

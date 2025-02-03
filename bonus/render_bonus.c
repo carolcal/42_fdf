@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 17:35:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/01 09:52:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_projected	isometric(t_point start, t_point end, t_cam *cam, float rad)
 	float		y1;
 	t_projected	proj;
 
-	rad = radiano(ANGLE);
 	x0 = ((start.x - start.y) * cos(rad));
 	y0 = ((start.x + start.y) * sin(rad));
 	proj.start_x = (x0 * cam->tile) + cam->offset_x;
@@ -51,6 +50,7 @@ void	render_line(t_point start, t_point end, t_fdf *fdf)
 	t_projected	proj;
 
 	rad = radiano(ANGLE);
+ //   if (fdf->map->view == ISOMETRIC)
 	proj = isometric(start, end, fdf->cam, rad);
 	draw_line(proj, fdf->img);
 }

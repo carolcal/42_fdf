@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 17:39:51 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/01 10:57:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_cam	*init_camera(t_map *map)
 	cam->offset_x = WIDTH / 2 - map_offset_x;
 	cam->offset_y = HEIGHT / 2 - map_offset_y;
 	cam->tile_z = get_tile_z(map);
+	cam->view = ISOMETRIC;
+	cam->rotation_x = 0;
+	cam->rotation_y = 0;
 	return (cam);
 }
 
