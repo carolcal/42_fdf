@@ -4,14 +4,6 @@ FDF (Fil de Fer) is the first graphic project at École 42. Using a graphic libr
 ## Process
 To accomplish this, the program follows these steps:
 
-**1. Validate Map**
-
-**2. Initiate Variables**
-
-**3. Render Map**
-
-**4. Free Variables**
-
 ### 1. Validate Map
 The first step is to check if the map has a .fdf extension, exists, and is not empty.
 
