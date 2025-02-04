@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:54 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/03 12:15:44 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:56:47 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ t_point	*fill_matrix_line(char **array, t_map *map, int y)
 		line[x].x = x;
 		line[x].y = y;
 		line[x].z = ft_atoi(array[x]);
-		if (map->max_z < ft_abs(line[x].z))
-			map->max_z = ft_abs(line[x].z);
-		line[x].color = get_color(line[x].z, array[x]);
+		if (map->max_z < line[x].z)
+			map->max_z = line[x].z;
+		else if (map->min_z > line[x].z)
+			map->min_z = line[x].z;
+		line[x].color = get_color(array[x]);
 		x++;
 	}
 	return (line);

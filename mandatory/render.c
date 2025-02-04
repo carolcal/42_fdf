@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 18:18:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:22:43 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void	render_line(t_point start, t_point end, t_fdf *fdf)
 	float		rad;
 	t_projected	proj;
 
+	if (!start.color || !end.color)
+	{
+		start.color = gen_color(fdf->map->max_z, fdf->map->min_z, start.z);
+		end.color = gen_color(fdf->map->max_z, fdf->map->min_z, end.z);
+	}
 	rad = radiano(ANGLE);
 	proj = isometric(start, end, fdf->cam, rad);
 	draw_line(proj, fdf->img);

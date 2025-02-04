@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:21:00 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/03 16:32:22 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:18:43 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ uint32_t	put_alpha(uint32_t color)
 	return (rgba);
 }
 
-uint32_t	get_color(int z, char *value)
+uint32_t	get_color(char *value)
 {
 	char	*color;
 
@@ -60,10 +60,36 @@ uint32_t	get_color(int z, char *value)
 		color++;
 		return (put_alpha(ft_hex_to_int(color)));
 	}
-	if (z <= 0)
-		return (put_alpha(0x0000FF));
-	else
-		return (put_alpha(0xFFFFFF));
+	return (0);
+}
+
+uint32_t	gen_color(int max_z, int min_z, int curr_z)
+{
+	if (curr_z == 0)
+		return (COLOR3);
+	if (max_z > 0)
+	{
+		if (curr_z == max_z / 2)
+			return (COLOR2);
+		if (curr_z == max_z)
+			return (COLOR1);
+		if (curr_z > 0 && curr_z < max_z / 2)
+			return (gradient(COLOR2, COLOR3, max_z / 2, max_z / 2 - curr_z));
+		if (curr_z > max_z / 2 && curr_z < max_z)
+			return (gradient(COLOR1, COLOR2, max_z / 2, max_z - curr_z));
+	}
+	if (min_z < 0)
+	{
+		if (curr_z == min_z)
+			return (COLOR5);
+		if (curr_z == min_z / 2)
+			return (COLOR4);
+		if (curr_z > min_z && curr_z < min_z / 2)
+			return (gradient(COLOR5, COLOR4, -min_z / 2, curr_z - min_z));
+		if (curr_z > min_z / 2 && curr_z < 0)
+			return (gradient(COLOR4, COLOR3, -min_z / 2, curr_z - min_z / 2));
+	}
+	return (0);
 }
 
 uint32_t	gradient(int start_color, int end_color, int grad_len, int position)

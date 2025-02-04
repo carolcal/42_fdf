@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/01/31 16:16:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:33:23 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_map	*init_map(char	*map_path)
 	map->width = get_map_width(map_path);
 	map->height = get_map_height(map_path);
 	map->max_z = 0;
+	map->min_z = 0;
 	map->matrix = get_map_matrix(map_path, map);
 	return (map);
 }

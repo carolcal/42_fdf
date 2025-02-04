@@ -43,9 +43,9 @@ void	scale(t_fdf *fdf)
 void	scale_z(t_fdf *fdf)
 {
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_I))
-		fdf->cam->tile_z += 0.02;
+		fdf->cam->tile_z += 0.03;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_O))
-		fdf->cam->tile_z -= 0.02;
+		fdf->cam->tile_z -= 0.03;
 }
 
 void	view(t_fdf *fdf)

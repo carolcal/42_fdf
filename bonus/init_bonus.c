@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:28 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/03 17:31:57 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:45:42 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_map	*init_map(char	*map_path)
 	map->width = get_map_width(map_path);
 	map->height = get_map_height(map_path);
 	map->max_z = 0;
+	map->min_z = 0;
 	map->matrix = get_map_matrix(map_path, map);
 	return (map);
 }
@@ -55,5 +56,6 @@ t_fdf	*init_fdf(char *map_path)
 	if (!fdf->cam)
 		handle_error(CAM_ERROR);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	mlx_set_setting(MLX_DECORATED, true);
 	return (fdf);
 }

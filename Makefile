@@ -6,7 +6,7 @@
 #    By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/03 12:12:28 by cayamash          #+#    #+#              #
-#    Updated: 2025/02/03 18:54:34 by cayamash         ###   ########.fr        #
+#    Updated: 2025/02/04 14:30:30 by cayamash         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,12 @@ VALGRIND		:= valgrind --leak-check=full --track-origins=yes --show-leak-kinds=al
 
 #Style
 NO_PRINT		:= --no-print-directory
+CYAN			:= \033[1;36m
 GREEN			:= \033[1;32m
+RED     		:= \033[1;31m
+YELLOW  		:= \033[1;33m
+MAGENTA 		:= \033[1;35m
+BLUE    		:= \033[1;34m
 END				:= \033[0m
 
 #Rules
@@ -60,10 +65,20 @@ libmlx:
 bonus: libmlx libft $(NAME_BONUS)
 
 val:
-	$(VALGRIND) ./fdf ./maps/42.fdf > valgrind.log 2>&1
+	$(VALGRIND) ./fdf ./maps/teste.fdf > valgrind.log 2>&1
 
 val_bonus:
-	$(VALGRIND) ./fdf_bonus ./maps/42.fdf > valgrind.log 2>&1
+	$(VALGRIND) ./fdf_bonus ./maps/teste.fdf > valgrind.log 2>&1
+
+norm:
+	@echo "\n$(CYAN)======= LIBFT =======$(END)"
+	@norminette libs/libft | sed 's/OK/\x1b[1;32m&\x1b[0m/g' | sed 's/Error/\x1b[1;31m&\x1b[0m/g'
+	@echo "\n$(YELLOW)======= MANDATORY =======$(END)"
+	@norminette mandatory | sed 's/OK/\x1b[1;32m&\x1b[0m/g' | sed 's/Error/\x1b[1;31m&\x1b[0m/g'
+	@echo "\n$(MAGENTA)======= BONUS =======$(END)"
+	@norminette bonus | sed 's/OK/\x1b[1;32m&\x1b[0m/g' | sed 's/Error/\x1b[1;31m&\x1b[0m/g'
+	@echo "\n$(BLUE)======= INCLUDES =======$(END)"
+	@norminette include | sed 's/OK/\x1b[1;32m&\x1b[0m/g' | sed 's/Error/\x1b[1;31m&\x1b[0m/g'
 
 #Compile object files
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
