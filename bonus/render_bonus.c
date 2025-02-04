@@ -6,7 +6,7 @@
 /*   By: cayamash <cayamash@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:19:51 by cayamash          #+#    #+#             */
-/*   Updated: 2025/02/04 14:13:43 by cayamash         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:36:02 by cayamash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,10 @@ void	render_line(t_point start, t_point end, t_fdf *fdf)
 {
 	t_projected	proj;
 
-	if (!start.color || !end.color)
-	{
+	if (!start.color)
 		start.color = gen_color(fdf->map->max_z, fdf->map->min_z, start.z);
+	if (!end.color)
 		end.color = gen_color(fdf->map->max_z, fdf->map->min_z, end.z);
-	}
 	start = rotate(start, fdf->cam);
 	end = rotate(end, fdf->cam);
 	proj = get_projection(start, end, fdf->cam);
