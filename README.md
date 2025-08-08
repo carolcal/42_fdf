@@ -41,3 +41,5 @@ In the bonus part I added:
     - Left projection: key 5
 - Zoom in and out: +/- keys
 - Height increase and decrease: I/O keys
+  
+![FDF_gif](https://github.com/user-attachments/assets/5990e724-69ae-4a05-8264-5be8c5145cd6)
